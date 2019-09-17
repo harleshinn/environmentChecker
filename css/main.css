@@ -1,0 +1,76 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.main-wrapper {
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+@media screen and (min-width: 980px) {
+  .main-wrapper {
+    width: 60rem;
+  }
+}
+
+.main-wrapper .title {
+  font-size: 2rem;
+  color: #ad73b7;
+  margin: 1rem 0;
+}
+
+.main-wrapper .row {
+  border-bottom: 1px solid #ccc;
+  padding: .75rem 1rem;
+  color: #5a5a5a;
+}
+
+.main-wrapper .row div:first-child {
+  width: 120px;
+}
+
+.main-wrapper .row,
+.main-wrapper header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.main-wrapper header {
+  padding: 1rem;
+  background: #c9f3da;
+}
+.main-wrapper ul > li {
+  list-style-type: none;
+}
+
+.main-wrapper input[type="checkbox"] {
+  display: none;
+}
+
+.main-wrapper .env__status {
+  padding: .5rem 2rem;
+  border-radius: 8px;
+  margin: 0 1rem;
+  display: inline-block;
+  width: 150px;
+  text-align: center;
+}
+
+
+.main-wrapper .env__status.on {
+  background: #c4fd6d;
+}
+
+.main-wrapper .env__status.off {
+  background: #ff9999;
+}
