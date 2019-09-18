@@ -1,12 +1,13 @@
 <?php
 
-$envName = isset($_POST['env_name']) ? $_POST['env_name'] : '';
-$envStatus = isset($_POST['env_status']) ? $_POST['env_status'] : '';
+
+$data = json_decode(file_get_contents('php://input'), true);
+$env = $data["env"];
+$envStatus = $data["envStatus"].'32';
+$envId = $data["envId"];
 
 
-print_r($_POST);
-
-function setEnviromentStatus(){
+function setEnviromentStatus($env, $envStatus, $envId){
   $serverName = 'localhost';
   $user = 'mrm_env_checker';
   $pass = 'mrm1234';
@@ -18,22 +19,13 @@ function setEnviromentStatus(){
       die ('connection failed: ' . $conn->connect_error);
     }
     
-    $sql = "SELECT * FROM environment_status";
+    $sql = "UPDATE environment_status SET env_name=".$env.",env_status=".$envStatus." WHERE env_id=".$envId."";
+    echo $sql;
     $result = $conn->query($sql);
-  
-  
-   if ($result->num_rows > 0) {
-      $data = array();
-      while($row = $result->fetch_assoc()) {
-        $data[] = $row;
-      }
-      return $data;
-    } else {
-      return "no results";
-    } 
     $conn->close();
 }
 
+setEnviromentStatus($env, $envStatus, $envId);
 
 function getEnvironments() {
   $serverName = 'localhost';

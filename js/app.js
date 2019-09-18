@@ -8,6 +8,7 @@ $checkbox.forEach(function(_val, _key) {
   
   $checkbox[_key].addEventListener('click', function(_e){
     let $env = this.id;
+    let $envId = this.getAttribute('data-id');
     let $envStatus = this.nextElementSibling.getAttribute('data-status');
     
     
@@ -23,39 +24,13 @@ $checkbox.forEach(function(_val, _key) {
       this.nextElementSibling.classList.add('off');
     }
     
-    // tiene que levantar cada checkbox y su sibling span y mandar los valores
-    // a setEnviromentsStatus($env, $envStatus) para que actualice el que corresponde
-    // sino siempre envía el mismo
-    setEnviromentStatus($env, $envStatus);
+    setEnviromentStatus($env, $envStatus, $envId);
     
   });
 });
 
 
-function setEnviromentStatus2() {
-  let $form = document.querySelector('#enviroments');
-  let $env = document.querySelector('.env__name').innerHTML;
-  let $envStatus = document.querySelector('[data-status]').getAttribute('data-status');
-  let $formData2 = [];
-  $formData2.push($env, $envStatus);
-  
-  
-  const $formData = new FormData($form);
-  
-  fetch('checker.php', {
-    method : 'post',
-    body : $formData2
-  }).then(function(response){
-    console.log(response);
-    return response.text();
-  }).then(function(text) {
-    //console.log(text);
-  }).catch(function(error){
-    console.error(error);
-  });
-}
-
-function setEnviromentStatus($env, $envStatus){
+function setEnviromentStatus($env, $envStatus, $envId){
   
   let httpRequest = new XMLHttpRequest();
   
@@ -73,12 +48,13 @@ function setEnviromentStatus($env, $envStatus){
       }
     } 
   }
-  
+  var $lalala = {'env': $env, 'envStatus': $envStatus, 'envId' : $envId};
+
   httpRequest.open('POST', 'checker.php', true);
   
-  //httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-  httpRequest.setRequestHeader('Content-type', 'application/json');
-  console.log(JSON.stringify($formData2));
-  httpRequest.send(JSON.stringify($formData2));
+  httpRequest.setRequestHeader('Content-Type', 'application/json');
+
+  httpRequest.send(JSON.stringify($lalala));
+  console.log($lalala)
   
 } 

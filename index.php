@@ -27,7 +27,7 @@
             ?>
             <div class="row">
               <div><span class="env__name" data-form="env_name"><?php echo strtoupper($env['env_name']); ?></span></div>
-              <div><input type="checkbox" name="status" id="<?php echo $env['env_name'];?>"> <label data-form="env_status" data-status="<?php echo $env['env_status'];?>" for="<?php echo $env['env_name'];?>" class="env__status on"><?php echo ($env['env_status'] == 1) ? 'Available' : 'Unavailable';?></label></div>
+              <div><input type="checkbox" name="status" data-id="<?php echo $env['env_id'];?>" id="<?php echo $env['env_name'];?>"> <label data-form="env_status" data-status="<?php echo $env['env_status'];?>" for="<?php echo $env['env_name'];?>" class="env__status on"><?php echo ($env['env_status'] == 1) ? 'Available' : 'Unavailable';?></label></div>
               <div><span class="env__build">Mon, 02/09/2019, 10:23:30</span></div>
               <div><span class="env__branch">feature/NGJ-111</span></div>
               <div><span class="env__developer">mperez2s</span></div>
