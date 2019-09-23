@@ -3,7 +3,7 @@
 
 $data = json_decode(file_get_contents('php://input'), true);
 $env = $data["env"];
-$envStatus = $data["envStatus"].'32';
+$envStatus = $data["envStatus"];
 $envId = $data["envId"];
 
 
@@ -19,7 +19,8 @@ function setEnviromentStatus($env, $envStatus, $envId){
       die ('connection failed: ' . $conn->connect_error);
     }
     
-    $sql = "UPDATE environment_status SET env_name=".$env.",env_status=".$envStatus." WHERE env_id=".$envId."";
+    //$sql = "UPDATE environment_status SET env_name=$env,env_status=$envStatus WHERE env_id=$envId";
+    $sql = "UPDATE environment_status SET env_status='".$envStatus."' WHERE env_id='".$envId."'";
     echo $sql;
     $result = $conn->query($sql);
     $conn->close();
