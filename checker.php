@@ -21,7 +21,6 @@ function setEnviromentStatus($env, $envStatus, $envId){
     
     //$sql = "UPDATE environment_status SET env_name=$env,env_status=$envStatus WHERE env_id=$envId";
     $sql = "UPDATE environment_status SET env_status='".$envStatus."' WHERE env_id='".$envId."'";
-    echo $sql;
     $result = $conn->query($sql);
     $conn->close();
 }

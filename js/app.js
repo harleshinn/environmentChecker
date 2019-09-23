@@ -12,31 +12,31 @@ $checkbox.forEach(function(_val, _key) {
     $checkbox[_key].nextElementSibling.innerHTML = 'Unavailable';
     $checkbox[_key].nextElementSibling.classList.add('off');
     $checkbox[_key].nextElementSibling.classList.remove('on');
+    console.log($checkbox[_key].checked);
+  } else if ($envStatus == 1) {
+    $checkbox[_key].checked = true;
   } 
-  
+
   $checkbox[_key].addEventListener('click', function(_e){
     
     let $env = this.id;
     let $envId = this.getAttribute('data-id');
     let $envStatus = this.nextElementSibling.getAttribute('data-status');
     if ( this.checked == true ) {
+      console.log('checked true ' + this.checked)
       this.nextElementSibling.innerHTML = 'Available';
       this.nextElementSibling.classList.remove('off');
       this.nextElementSibling.classList.add('on');
-      if ($envStatus == 0 ) {
-        this.nextElementSibling.setAttribute('data-status', '1');
-      }
-      console.log($envStatus);
-      
+      this.nextElementSibling.setAttribute('data-status', '1');
+      $envStatus = this.nextElementSibling.getAttribute('data-status');    
     }
     else {
+      console.log('checked false ' + this.checked)
       this.nextElementSibling.innerHTML = 'Unavailable';
       this.nextElementSibling.classList.remove('on');
       this.nextElementSibling.classList.add('off');
-      if ($envStatus == 1 ) {
-        this.nextElementSibling.setAttribute('data-status', '0');
-      }
-      console.log($envStatus);
+      this.nextElementSibling.setAttribute('data-status', '0');
+      $envStatus = this.nextElementSibling.getAttribute('data-status');
     }
     
     setEnviromentStatus($env, $envStatus, $envId);
@@ -61,8 +61,8 @@ function setEnviromentStatus($env, $envStatus, $envId){
       }
     } 
   }
-  console.log('env id: ' + $envId)
-  var $serverData = {'env': $env, 'envStatus': $envStatus, 'envId' : $envId};
+  
+  let $serverData = {'env': $env, 'envStatus': $envStatus, 'envId' : $envId};
 
   httpRequest.open('POST', 'checker.php', true);
   
